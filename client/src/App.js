@@ -8,7 +8,7 @@ const App = () => {
   ]);
   // const [formValidated, setFormValidated] = useState(false);
 
-  // use x-www-form-urlencoded - won't work
+  // use x-www-form-urlencoded - JSON won't work
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event)
