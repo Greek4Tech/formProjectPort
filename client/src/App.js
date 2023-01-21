@@ -1,3 +1,4 @@
+// Import the useState hook and the React library
 import React, { useState } from "react";
 
 const App = () => {
