@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 const App = () => {
+  // Initialize three state variables using the useState hook
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [lineOfItems, setLineOfItems] = useState([
