@@ -12,6 +12,7 @@ const App = () => {
 
   // Define a function that will be called when the form is submitted
   const handleSubmit = (event) => {
+    // prevent the default form submission behavior
     event.preventDefault();
     console.log(event)
     console.log(name,address,lineOfItems)
