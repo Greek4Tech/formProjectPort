@@ -16,6 +16,8 @@ const App = () => {
     event.preventDefault();
     console.log(event)
     console.log(name,address,lineOfItems)
+
+    // Create a new URLSearchParams object to store the form data
     const body = new URLSearchParams();
     body.append('payment_method_types[]', 'card');
     lineOfItems.forEach((item, index) => {
