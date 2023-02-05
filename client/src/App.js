@@ -20,6 +20,8 @@ const App = () => {
     // Create a new URLSearchParams object to store the form data
     const body = new URLSearchParams();
     body.append('payment_method_types[]', 'card');
+    
+    // Add each line item to the URLSearchParams object
     lineOfItems.forEach((item, index) => {
       body.append(`line_items[${index}][price_data][currency]`, 'usd');
       body.append(`line_items[${index}][price_data][product_data][name]`, item.description);
