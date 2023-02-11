@@ -34,6 +34,7 @@ const App = () => {
     body.append('success_url', 'https://example.com/success');
     body.append('cancel_url', 'https://example.com/cancel');
     
+    // Make a POST request to the Stripe API using the fetch API
     fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
       headers: {
