@@ -41,6 +41,7 @@ const App = () => {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
       },
+      // Use the URLSearchParams object as the request body
       body: body
     })
     .then(res => res.json())
