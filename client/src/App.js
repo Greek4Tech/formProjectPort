@@ -59,6 +59,7 @@ const App = () => {
     setAddress(event.target.value);
   };
 
+   // Define a function to update a specific line item in the lineOfItems state variable
   const handleChangeLine = (index, field, value) => {
     let copyOflineOfItems = [...lineOfItems];
     copyOflineOfItems[index][field] = value;
