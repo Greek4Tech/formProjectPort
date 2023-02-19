@@ -66,6 +66,7 @@ const App = () => {
     setLineOfItems(copyOflineOfItems);
   };
 
+  // Define a function to add a new line item to the lineOfItems state variable
   const addALine = () => {
     let copyOfLineList = [...lineOfItems];
     setLineOfItems([
