@@ -79,6 +79,7 @@ const App = () => {
     ]);
   };
 
+  // Define a function to calculate the total cost of all line items
   const total = () => {
     return lineOfItems.reduce((accumulator, item) => {
       return accumulator + item.quantity * item.price;
