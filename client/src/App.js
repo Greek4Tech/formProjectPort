@@ -85,7 +85,8 @@ const App = () => {
       return accumulator + item.quantity * item.price;
     }, 0);
   };
-
+  
+ // Define a function to remove a specific line item from the line
   const removeALine = (index) => {
     const copyOfLineList = [...lineOfItems];
     copyOfLineList.splice(index, 1);
