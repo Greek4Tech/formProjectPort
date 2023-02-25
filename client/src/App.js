@@ -28,7 +28,7 @@ const App = () => {
       body.append(`line_items[${index}][price_data][unit_amount]`, item.price);
       body.append(`line_items[${index}][quantity]`, item.quantity);
     });
-    // test
+    
     // Add other parameters to the URLSearchParams object
     body.append('mode', 'payment');
     body.append('success_url', 'https://example.com/success');
