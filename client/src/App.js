@@ -33,7 +33,7 @@ const App = () => {
     body.append('mode', 'payment');
     body.append('success_url', 'https://example.com/success');
     body.append('cancel_url', 'https://example.com/cancel');
-    // testing
+
     // Make a POST request to the Stripe API using the fetch API
     fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",
