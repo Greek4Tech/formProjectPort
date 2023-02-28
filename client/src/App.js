@@ -49,7 +49,7 @@ const App = () => {
     .catch(err => console.error(err))
   }
    
-
+// added comments
   // Define two event handler functions to update the name and address state variables
   const changeName = (event) => {
     setName(event.target.value);
