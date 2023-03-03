@@ -54,7 +54,6 @@ const App = () => {
   const changeName = (event) => {
     setName(event.target.value);
   };
-
   const changeAddress = (event) => {
     setAddress(event.target.value);
   };
