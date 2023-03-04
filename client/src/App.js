@@ -96,7 +96,7 @@ const App = () => {
     <>
       <form onSubmit={handleSubmit} >
         <label 
-        // className - Label - Name
+        // Tailwind classNames
         className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
         htmlFor="name">Name</label>
         <input 
