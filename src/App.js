@@ -74,6 +74,7 @@ const App = () => {
               id={`description${index}`}
               value={item.description}
               type="text"
+              required
               onChange={(event) => {
                 handleChangeLine(index, "description", event.target.value);
               }}
@@ -84,6 +85,7 @@ const App = () => {
               type="number"
               id={`quantity${index}`}
               value={item.quantity}
+              required
               onChange={(event) =>
                 handleChangeLine(index, "quantity", event.target.value)
               }
@@ -94,6 +96,7 @@ const App = () => {
               type="number"
               id={`price${index}`}
               value={item.price}
+              required
               onChange={(event) =>
                 handleChangeLine(index, "price", event.target.value)
               }
@@ -103,7 +106,7 @@ const App = () => {
         ))}
         <div>
           <button onClick={addALine}>Add A line</button>
-          <button type="button">Submit</button>
+          {/* <button type="button">Submit</button> */}
         </div>
         <p>The total is: {total()}</p>
         <button type="submit">Submit</button>
