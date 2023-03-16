@@ -64,14 +64,16 @@ const App = () => {
           required value={name} 
           onChange={changeName}
           />
-        <label htmlFor="address">Address</label>
+        <label 
+        className="block text-sm font-medium leading-6 text-gray-900"
+        htmlFor="address">Address</label>
         <textarea
           type="text"
           id="address"
           value={address}
           onChange={changeAddress}
           required
-          
+          className="mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
