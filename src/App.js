@@ -6,17 +6,11 @@ const App = () => {
   const [lineOfItems, setLineOfItems] = useState([
     { description: "", quantity: 1, price: 0 }
   ]);
-  const [formValidated, setFormValidated] = useState(false);
+  // const [formValidated, setFormValidated] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      console.log(name, address, lineOfItems)
-    }
-    setFormValidated(true);
+    console.log(event)
   };
 
   const changeName = (event) => {
@@ -59,9 +53,9 @@ const App = () => {
 
   return (
     <>
-      <form onClick={handleSubmit} >
+      <form onSubmit={handleSubmit} >
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" required value={name} onChange={changeName} />
+        <input type="text" id="name" minlength="4" required value={name} onChange={changeName} />
         <label htmlFor="address">Address</label>
         <textarea
           type="text"
@@ -69,6 +63,7 @@ const App = () => {
           value={address}
           onChange={changeAddress}
           required
+          minlength="1"
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
@@ -108,9 +103,10 @@ const App = () => {
         ))}
         <div>
           <button onClick={addALine}>Add A line</button>
-          <button type="submit">Submit</button>
+          <button type="button">Submit</button>
         </div>
         <p>The total is: {total()}</p>
+        <button type="submit">Submit</button>
       </form>
     </>
   );
