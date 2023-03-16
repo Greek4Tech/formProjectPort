@@ -81,7 +81,7 @@ const App = () => {
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
-          <div key={index}>
+          <div className = "md:flex" key={index}>
             {/* Description */}
             <label 
             className="block text-sm font-medium leading-6 text-gray-900"
