@@ -55,7 +55,13 @@ const App = () => {
     <>
       <form onSubmit={handleSubmit} >
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" minlength="4" required value={name} onChange={changeName} />
+        <input 
+          type="text" 
+          id="name" 
+          minlength="1" 
+          required value={name} 
+          onChange={changeName}
+          />
         <label htmlFor="address">Address</label>
         <textarea
           type="text"
@@ -63,7 +69,7 @@ const App = () => {
           value={address}
           onChange={changeAddress}
           required
-          minlength="1"
+          
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
@@ -74,6 +80,7 @@ const App = () => {
               id={`description${index}`}
               value={item.description}
               type="text"
+              required
               onChange={(event) => {
                 handleChangeLine(index, "description", event.target.value);
               }}
@@ -84,6 +91,7 @@ const App = () => {
               type="number"
               id={`quantity${index}`}
               value={item.quantity}
+              required
               onChange={(event) =>
                 handleChangeLine(index, "quantity", event.target.value)
               }
@@ -94,6 +102,7 @@ const App = () => {
               type="number"
               id={`price${index}`}
               value={item.price}
+              required
               onChange={(event) =>
                 handleChangeLine(index, "price", event.target.value)
               }
@@ -103,7 +112,7 @@ const App = () => {
         ))}
         <div>
           <button onClick={addALine}>Add A line</button>
-          <button type="button">Submit</button>
+          {/* <button type="button">Submit</button> */}
         </div>
         <p>The total is: {total()}</p>
         <button type="submit">Submit</button>
