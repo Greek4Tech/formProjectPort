@@ -55,7 +55,13 @@ const App = () => {
     <>
       <form onSubmit={handleSubmit} >
         <label htmlFor="name">Name</label>
-        <input type="text" id="name" minlength="4" required value={name} onChange={changeName} />
+        <input 
+          type="text" 
+          id="name" 
+          minlength="1" 
+          required value={name} 
+          onChange={changeName}
+          />
         <label htmlFor="address">Address</label>
         <textarea
           type="text"
@@ -63,7 +69,7 @@ const App = () => {
           value={address}
           onChange={changeAddress}
           required
-          minlength="1"
+          
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
