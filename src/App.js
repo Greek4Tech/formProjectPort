@@ -11,6 +11,7 @@ const App = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event)
+    console.log(name,address,lineOfItems)
   };
 
   const changeName = (event) => {
@@ -54,10 +55,13 @@ const App = () => {
   return (
     <>
       <form onSubmit={handleSubmit} >
-        <label className="block text-sm font-medium leading-6 text-gray-900"
+        <label 
+        // className - Label - Name
+        className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
         htmlFor="name">Name</label>
         <input 
-        className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        // className - Input - Name
+        className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           type="text" 
           id="name" 
           minlength="1" 
@@ -65,7 +69,7 @@ const App = () => {
           onChange={changeName}
           />
         <label 
-        className="block text-sm font-medium leading-6 text-gray-900"
+        className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
         htmlFor="address">Address</label>
         <textarea
           type="text"
@@ -73,13 +77,15 @@ const App = () => {
           value={address}
           onChange={changeAddress}
           required
-          className="mt-1 block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+          className="mt-1 inline-flex justify-center w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
         ></textarea>
         <h2>List of Items</h2>
         {lineOfItems.map((item, index) => (
-          <div key={index}>
+          <div className = "md:flex" key={index}>
             {/* Description */}
-            <label htmlFor={`description${index}`}>Description</label>
+            <label 
+            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+            htmlFor={`description${index}`}>Description</label>
             <input
               id={`description${index}`}
               value={item.description}
@@ -88,9 +94,12 @@ const App = () => {
               onChange={(event) => {
                 handleChangeLine(index, "description", event.target.value);
               }}
+              className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             {/* quantity */}
-            <label htmlFor={`quantity${index}`}>Quantity</label>
+            <label 
+            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+            htmlFor={`quantity${index}`}>Quantity</label>
             <input
               type="number"
               id={`quantity${index}`}
@@ -99,9 +108,12 @@ const App = () => {
               onChange={(event) =>
                 handleChangeLine(index, "quantity", event.target.value)
               }
+              className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             {/* price */}
-            <label htmlFor={`price${index}`}>Price</label>
+            <label 
+            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+            htmlFor={`price${index}`}>Price</label>
             <input
               type="number"
               id={`price${index}`}
@@ -110,16 +122,20 @@ const App = () => {
               onChange={(event) =>
                 handleChangeLine(index, "price", event.target.value)
               }
+              className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
-            <button onClick={() => removeALine(index)}>Remove a Line</button>
+            <button  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            onClick={() => removeALine(index)}>Remove a Line</button>
           </div>
         ))}
         <div>
-          <button onClick={addALine}>Add A line</button>
+          <button  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+          onClick={addALine}>Add A line</button>
           {/* <button type="button">Submit</button> */}
         </div>
-        <p>The total is: {total()}</p>
-        <button type="submit">Submit</button>
+        <p className="mt-1 text-sm text-gray-600">The total is: {total()}</p>
+        <button  className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        type="submit">Submit</button>
       </form>
     </>
   );
