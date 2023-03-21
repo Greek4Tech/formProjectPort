@@ -23,13 +23,13 @@ const App = () => {
   };
 
   const handleChangeLine = (index, field, value) => {
-    const copyOflineOfItems = [...lineOfItems];
+    let copyOflineOfItems = [...lineOfItems];
     copyOflineOfItems[index][field] = value;
     setLineOfItems(copyOflineOfItems);
   };
 
   const addALine = () => {
-    const copyOfLineList = [...lineOfItems];
+    let copyOfLineList = [...lineOfItems];
     setLineOfItems([
       ...copyOfLineList,
       {
