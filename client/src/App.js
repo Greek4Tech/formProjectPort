@@ -14,12 +14,13 @@ const App = () => {
     console.log(name,address,lineOfItems)
     const body = new URLSearchParams();
     body.append('payment_method_types[]', 'card');
-    lineOfItems.forEach(item => {
-      body.append('line_items[][price_data][currency]', 'usd');
-      body.append('line_items[][price_data][product_data][name]', item.description);
-      body.append('line_items[][price_data][unit_amount]', item.price);
-      body.append('line_items[][quantity]', item.quantity);
+    lineOfItems.forEach((item, index) => {
+      body.append(`line_items[${index}][price_data][currency]`, 'usd');
+      body.append(`line_items[${index}][price_data][product_data][name]`, item.description);
+      body.append(`line_items[${index}][price_data][unit_amount]`, item.price);
+      body.append(`line_items[${index}][quantity]`, item.quantity);
     });
+    
     body.append('mode', 'payment');
     body.append('success_url', 'https://example.com/success');
     body.append('cancel_url', 'https://example.com/cancel');
@@ -35,7 +36,8 @@ const App = () => {
     .then(res => res.json())
     .then(data => console.log(data))
     .catch(err => console.error(err))
-  }    
+  }
+   
 
   const changeName = (event) => {
     setName(event.target.value);
