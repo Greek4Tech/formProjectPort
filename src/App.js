@@ -12,7 +12,30 @@ const App = () => {
     event.preventDefault();
     console.log(event)
     console.log(name,address,lineOfItems)
-  };
+    const body = new URLSearchParams();
+    body.append('payment_method_types[]', 'card');
+    lineOfItems.forEach(item => {
+      body.append('line_items[][price_data][currency]', 'usd');
+      body.append('line_items[][price_data][product_data][name]', item.description);
+      body.append('line_items[][price_data][unit_amount]', item.price);
+      body.append('line_items[][quantity]', item.quantity);
+    });
+    body.append('mode', 'payment');
+    body.append('success_url', 'https://example.com/success');
+    body.append('cancel_url', 'https://example.com/cancel');
+    
+    fetch("https://api.stripe.com/v1/checkout/sessions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
+      },
+      body: body
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
+  }    
 
   const changeName = (event) => {
     setName(event.target.value);
