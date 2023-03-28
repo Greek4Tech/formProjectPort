@@ -10,6 +10,13 @@ const App = () => {
   ]);
   // const [formValidated, setFormValidated] = useState(false);
 
+  const callingYou = () => {
+  fetch('http://localhost:4000/')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error))
+  }
+
   // Define a function that will be called when the form is submitted
   const handleSubmit = (event) => {
     // prevent the default form submission behavior
@@ -177,9 +184,10 @@ const App = () => {
           {/* <button type="button">Submit</button> */}
         </div>
         <p className="mt-1 text-sm text-gray-600">The total is: {total()}</p>
-        <button  className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+        <button className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         type="submit">Submit</button>
       </form>
+      <button onClick={() => callingYou()}>Another One</button>
     </>
   );
 };
