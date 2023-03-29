@@ -28,6 +28,7 @@ fetch("http://localhost:4000/charge", {
   .then((response) => response.json())
   .then((data) => {
     console.log("Success:", data);
+    window.location.href = data.url
   })
   .catch((error) => {
     console.error("Error:", error);
