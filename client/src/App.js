@@ -10,13 +10,6 @@ const App = () => {
   ]);
   // const [formValidated, setFormValidated] = useState(false);
 
-  const callingYou = () => {
-  fetch('http://localhost:4000/')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error))
-  }
-
   // Define a function that will be called when the form is submitted
   const handleSubmit = (event) => {
     // prevent the default form submission behavior
@@ -24,36 +17,26 @@ const App = () => {
     console.log(event)
     console.log(name,address,lineOfItems)
 
-    // Create a new URLSearchParams object to store the form data
-    const body = new URLSearchParams();
-    body.append('payment_method_types[]', 'card');
-
-    // Add each line item to the URLSearchParams object
-    lineOfItems.forEach((item, index) => {
-      body.append(`line_items[${index}][price_data][currency]`, 'usd');
-      body.append(`line_items[${index}][price_data][product_data][name]`, item.description);
-      body.append(`line_items[${index}][price_data][unit_amount]`, item.price);
-      body.append(`line_items[${index}][quantity]`, item.quantity);
-    });
-    
-    // Add other parameters to the URLSearchParams object
-    body.append('mode', 'payment');
-    body.append('success_url', 'https://example.com/success');
-    body.append('cancel_url', 'https://example.com/cancel');
-
-    // Make a POST request to the Stripe API using the fetch API
-    fetch("https://api.stripe.com/v1/checkout/sessions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
-      },
-      // Use the URLSearchParams object as the request body
-      body: body
-    })
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
+  const data = [
+    { description: "apples", quantity: 1, price: 100 },
+    { description: "mayo", quantity: 1, price: 250 },
+    { description: "oranges", quantity: 1, price: 400 },
+]
+fetch("http://localhost:4000/charge", {
+  method: "POST", // or 'PUT'
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(data),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Success:", data);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+  //  we will receive JSON
   }
    
 
@@ -187,7 +170,6 @@ const App = () => {
         <button className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         type="submit">Submit</button>
       </form>
-      <button onClick={() => callingYou()}>Another One</button>
     </>
   );
 };
