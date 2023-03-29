@@ -17,11 +17,7 @@ const App = () => {
     console.log(event)
     console.log(name,address,lineOfItems)
 
-  const data = [
-    { description: "apples", quantity: 1, price: 100 },
-    { description: "mayo", quantity: 1, price: 250 },
-    { description: "oranges", quantity: 1, price: 400 },
-]
+  const data = lineOfItems
 fetch("http://localhost:4000/charge", {
   method: "POST", // or 'PUT'
   headers: {
