@@ -5,7 +5,7 @@ const cors = require('cors')
 const port = 4000;
 
 app.use(cors())
-
+app.use(express.json());
 
 
 app.get('/', (req, res) => {
