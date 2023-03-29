@@ -37,7 +37,10 @@ app.post('/charge', (req, res) => {
       "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
     }
   })
-  .then(response => console.log(response.data))
+  .then(response => {
+    console.log(response.data)
+    res.json(response.data)
+  })
   .catch(error => console.error(error));
 });
 
