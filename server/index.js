@@ -4,6 +4,10 @@ const axios = require('axios')
 const cors = require('cors')
 const port = 4000;
 
+// database dependencies
+const mongoose = require('mongoose');
+const passport = require('passport');
+
 app.use(cors())
 app.use(express.json());
 
