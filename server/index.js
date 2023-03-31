@@ -8,6 +8,7 @@ const port = 4000;
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')
 
 app.use(cors())
 app.use(express.json());
