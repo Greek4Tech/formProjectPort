@@ -7,6 +7,7 @@ const port = 4000;
 // database dependencies
 const mongoose = require('mongoose');
 const passport = require('passport');
+const session = require('express-session');
 
 app.use(cors())
 app.use(express.json());
