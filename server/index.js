@@ -4,9 +4,27 @@ const axios = require('axios')
 const cors = require('cors')
 const port = 4000;
 
+// loads environment variables from a .env
+require('dotenv').config({ path: './config/.env' });
+
+// database dependencies
+const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')
+
 app.use(cors())
 app.use(express.json());
 
+app.use(session({
+  store: MongoStore.create({
+    secret: 'keyboard cat',
+    mongoUrl: process.env.MONGO_URI,
+    mongoOptions: { 
+      useUnifiedTopology: true 
+    }
+  })
+}));
 
 app.get('/', (req, res) => {
   res.json('Hello World!');
