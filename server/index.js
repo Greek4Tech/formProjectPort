@@ -17,11 +17,13 @@ app.use(cors())
 app.use(express.json());
 
 app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true,
   store: MongoStore.create({
-    secret: 'keyboard cat',
     mongoUrl: process.env.MONGO_URI,
-    mongoOptions: { 
-      useUnifiedTopology: true 
+    mongoOptions: {
+      useUnifiedTopology: true
     }
   })
 }));
