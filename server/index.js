@@ -12,6 +12,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')
+const dbConnect = require("./config/db/dbConnect");
+
+// execute database connection 
+dbConnect();
 
 app.use(cors())
 app.use(express.json());
