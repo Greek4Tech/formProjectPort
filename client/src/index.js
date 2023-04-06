@@ -9,6 +9,7 @@ import {
 import './index.css';
 import App from './App';
 import Signin from './Signin';
+import Signup from './Signup'
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/signin",
     element: <Signin />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 ]);
 
