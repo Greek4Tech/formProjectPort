@@ -13,7 +13,6 @@
   ```
 */
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 export default function Signin() {
@@ -28,26 +27,19 @@ export default function Signin() {
     setPassword(event.target.value);
   };
 
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
+   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:4000/login', {
+    const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
-    });
-  
-    if (response.ok) {
-      // redirect to root route
-     navigate('/');
-    } else {
-      console.log("User or Password don't work")
-    }
+    })
+    // handle response
+    .then(response => console.log(response))
   };
-  
+
   return (
     <>
       {/*
@@ -72,7 +64,7 @@ export default function Signin() {
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
               <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                Sign Up
+                start your 14-day free trial
               </a>
             </p>
           </div>
