@@ -12,9 +12,34 @@
   }
   ```
 */
+import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 export default function Signin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+   const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch('http://localhost:4000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+    // handle response
+    .then(response => console.log(response))
+  };
+
   return (
     <>
       {/*
@@ -43,7 +68,7 @@ export default function Signin() {
               </a>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit} action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
@@ -56,6 +81,7 @@ export default function Signin() {
                   type="email"
                   autoComplete="email"
                   required
+                  onChange={handleEmailChange}
                   className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Email address"
                 />
@@ -70,6 +96,7 @@ export default function Signin() {
                   type="password"
                   autoComplete="current-password"
                   required
+                  onChange={handlePasswordChange}
                   className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Password"
                 />
@@ -78,15 +105,15 @@ export default function Signin() {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input
+                {/* <input
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
+                /> */}
+                {/* <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                 c:\Users\leoni\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-sandbox\workbench\workbench.html Remember me
+                </label> */}
               </div>
 
               <div className="text-sm">
