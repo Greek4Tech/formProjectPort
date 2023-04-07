@@ -15,7 +15,7 @@
 import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 
-export default function Signin() {
+export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -59,12 +59,12 @@ export default function Signin() {
               alt="Your Company"
             />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Sign in to your account
+              Sign Up
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{' '}
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                start your 14-day free trial
+              <a href="/signin" className="font-medium text-indigo-600 hover:text-indigo-500">
+                If you already have an account, sign in. 
               </a>
             </p>
           </div>
