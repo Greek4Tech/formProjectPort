@@ -27,7 +27,7 @@ export default function Signup() {
     setPassword(event.target.value);
   };
 
-   const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const response = await fetch('http://localhost:4000/register', {
       method: 'POST',
@@ -35,9 +35,11 @@ export default function Signup() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, password }),
-    })
+    });
     // handle response
-    .then(response => console.log(response))
+    if (response.ok) {
+      window.location.replace("/");
+    }
   };
 
   return (
@@ -80,6 +82,7 @@ export default function Signup() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  value={email}
                   required
                   onChange={handleEmailChange}
                   className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -95,6 +98,7 @@ export default function Signup() {
                   name="password"
                   type="password"
                   autoComplete="current-password"
+                  value={password}
                   required
                   onChange={handlePasswordChange}
                   className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -131,7 +135,7 @@ export default function Signup() {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                Sign in
+                Sign Up
               </button>
             </div>
           </form>
