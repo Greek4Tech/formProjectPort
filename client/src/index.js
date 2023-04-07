@@ -10,6 +10,7 @@ import './index.css';
 import App from './App';
 import Signin from './Signin';
 import Signup from './Signup'
+import Login from './Login'
 import Register from './Register';
 import reportWebVitals from './reportWebVitals';
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
