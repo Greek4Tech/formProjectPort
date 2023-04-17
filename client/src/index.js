@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import './index.css';
 import App from './App';
-import Signin from './Signin';
+import Login from './Login';
 import Signup from './Signup'
 import reportWebVitals from './reportWebVitals';
 
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/signin",
-    element: <Signin />,
+    path: "/login",
+    element: <Login />,
   },
   {
     path: "/signup",
