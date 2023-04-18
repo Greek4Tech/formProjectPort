@@ -44,7 +44,7 @@ export default function Signin() {
       // redirect to root route
      navigate('/');
     } else {
-      console.log("User or Password don't work")
+      console.log("Username or Password don't work")
     }
   };
   
