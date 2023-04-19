@@ -11,11 +11,15 @@ import App from './App';
 import Login from './Login';
 import Signup from './Signup'
 import reportWebVitals from './reportWebVitals';
+import ProtectedRoutes from './ProtectedRoutes';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: 
+    <ProtectedRoutes>
+      <App />
+    </ProtectedRoutes>,
   },
   {
     path: "/login",
