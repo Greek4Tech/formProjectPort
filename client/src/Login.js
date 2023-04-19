@@ -15,6 +15,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export default function Signin() {
   const [email, setEmail] = useState('');
