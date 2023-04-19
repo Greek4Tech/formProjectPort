@@ -8,32 +8,13 @@ import {
 } from "react-router-dom";
 import './index.css';
 import App from './App';
-import Login from './Login';
-import Signup from './Signup'
 import reportWebVitals from './reportWebVitals';
-import ProtectedRoutes from './ProtectedRoutes';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: 
-    <ProtectedRoutes>
-      <App />
-    </ProtectedRoutes>,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signup",
-    element: <Signup />,
-  },
-]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );
 
