@@ -16,11 +16,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import Cookies from "universal-cookie";
+import axios from "axios";
 const cookies = new Cookies();
+
 
 export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [login, setLogin] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -32,23 +35,42 @@ export default function Signin() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const response = await fetch('http://localhost:4000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  const handleSubmit = (e) => {
+    // prevent the form from refreshing the whole page
+    e.preventDefault();
   
-    if (response.ok) {
-      // redirect to root route
-     navigate('/');
-    } else {
-      console.log("User or Password don't work")
-    }
+    // set configurations
+    const configuration = {
+      method: "post",
+      url: "http://localhost:3000/login",
+      data: {
+        email,
+        password,
+      },
+    };
+  
+    // make the API call
+    axios(configuration)
+      .then((result) => {
+        // set the cookie
+        cookies.set("TOKEN", result.data.token, {
+          path: "/",
+        });
+        // redirect user to the auth page
+        window.location.href = "/auth";
+  
+        // if everything is okay, redirect user to the home page
+        if (result.status === 200) {
+          window.location.href = "/";
+        }
+  
+        setLogin(true);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
   };
+  
   
   return (
     <>
