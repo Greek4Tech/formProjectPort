@@ -18,6 +18,7 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [visible, setVisible] = useState('');
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -38,7 +39,11 @@ export default function Signup() {
         body: JSON.stringify({ email, password }),
       });
       // handle response
-      console.log(response);
+      const dataResponse = await response.json()
+      console.log(dataResponse.message);
+      if (dataResponse.message === "User Created Successfully") {
+        console.log("hurray it worked")
+      }
     } catch (error) {
       console.error(error);
     }
