@@ -58,6 +58,7 @@ app.get('/', (req, res) => {
 
 // register endpoint
 app.post("/register", (request, response) => {
+  console.log(request.body)
   // hash the password
   bcrypt
     .hash(request.body.password, 10)
