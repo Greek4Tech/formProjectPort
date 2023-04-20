@@ -27,18 +27,23 @@ export default function Signup() {
     setPassword(event.target.value);
   };
 
-   const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:4000/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    })
-    // handle response
-    .then(response => console.log(response))
+    try {
+      const response = await fetch('http://localhost:4000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      // handle response
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
 
   return (
     <>

@@ -1,5 +1,7 @@
 // Import the useState hook and the React library
 import React, { useState } from "react";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const Home = () => {
   // Initialize three state variables using the useState hook
@@ -8,34 +10,34 @@ const Home = () => {
   const [lineOfItems, setLineOfItems] = useState([
     { description: "", quantity: 1, price: 0 }
   ]);
-  // const [formValidated, setFormValidated] = useState(false);
+
 
   // Define a function that will be called when the form is submitted
   const handleSubmit = (event) => {
     // prevent the default form submission behavior
     event.preventDefault();
     console.log(event)
-    console.log(name,address,lineOfItems)
+    console.log(name, address, lineOfItems)
 
-  const data = lineOfItems
-fetch("http://localhost:4000/charge", {
-  method: "POST", // or 'PUT'
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(data),
-})
-  .then((response) => response.json())
-  .then((data) => {
-    console.log("Success:", data);
-    window.location.href = data.url
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
-  //  we will receive JSON
+    const data = lineOfItems
+    fetch("http://localhost:4000/charge", {
+      method: "POST", // or 'PUT'
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        window.location.href = data.url
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    //  we will receive JSON
   }
-   
+
 
   // Define two event handler functions to update the name and address state variables
   const changeName = (event) => {
@@ -45,7 +47,7 @@ fetch("http://localhost:4000/charge", {
     setAddress(event.target.value);
   };
 
-   // Define a function to update a specific line item in the lineOfItems state variable
+  // Define a function to update a specific line item in the lineOfItems state variable
   const handleChangeLine = (index, field, value) => {
     let copyOflineOfItems = [...lineOfItems];
     copyOflineOfItems[index][field] = value;
@@ -72,32 +74,40 @@ fetch("http://localhost:4000/charge", {
     }, 0);
   };
 
- // Define a function to remove a specific line item from the line
+  // Define a function to remove a specific line item from the line
   const removeALine = (index) => {
     const copyOfLineList = [...lineOfItems];
     copyOfLineList.splice(index, 1);
     setLineOfItems(copyOfLineList);
   };
 
+  // logout
+  const logout = () => {
+    // destroy the cookie
+    cookies.remove("TOKEN", { path: "/" });
+    // redirect user to the landing page
+    window.location.href = "/";
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit} >
-        <label 
-        // Tailwind classNames
-        className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
-        htmlFor="name">Name</label>
-        <input 
-        // Tailwind classNames
-        className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          type="text" 
-          id="name" 
-          minlength="1" 
-          required value={name} 
+        <label
+          // Tailwind classNames
+          className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+          htmlFor="name">Name</label>
+        <input
+          // Tailwind classNames
+          className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          type="text"
+          id="name"
+          minlength="1"
+          required value={name}
           onChange={changeName}
-          />
-        <label 
-        className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
-        htmlFor="address">Address</label>
+        />
+        <label
+          className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+          htmlFor="address">Address</label>
         <textarea
           type="text"
           id="address"
@@ -107,14 +117,14 @@ fetch("http://localhost:4000/charge", {
           className="mt-1 inline-flex justify-center w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
         ></textarea>
         <h2>List of Items</h2>
-        
+
         {/* Mapping over array of items and generating a div with inputs for each */}
         {lineOfItems.map((item, index) => (
-          <div className = "md:flex" key={index}>
+          <div className="md:flex" key={index}>
             {/* Description */}
-            <label 
-            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
-            htmlFor={`description${index}`}>Description</label>
+            <label
+              className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+              htmlFor={`description${index}`}>Description</label>
             <input
               id={`description${index}`}
               value={item.description}
@@ -126,9 +136,9 @@ fetch("http://localhost:4000/charge", {
               className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             {/* quantity */}
-            <label 
-            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
-            htmlFor={`quantity${index}`}>Quantity</label>
+            <label
+              className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+              htmlFor={`quantity${index}`}>Quantity</label>
             <input
               type="number"
               id={`quantity${index}`}
@@ -140,9 +150,9 @@ fetch("http://localhost:4000/charge", {
               className="inline-flex justify-center w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
             {/* price */}
-            <label 
-            className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
-            htmlFor={`price${index}`}>Price</label>
+            <label
+              className="inline-flex justify-center text-sm font-medium leading-6 text-gray-900"
+              htmlFor={`price${index}`}>Price</label>
             <input
               type="number"
               id={`price${index}`}
@@ -155,17 +165,19 @@ fetch("http://localhost:4000/charge", {
             />
             {/* Button that removes a line, includes Tailwind classes */}
             <button type="button" className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-            onClick={() => removeALine(index)}>Remove a Line</button>
+              onClick={() => removeALine(index)}>Remove a Line</button>
           </div>
         ))}
         <div>
           <button type="button" className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-          onClick={addALine}>Add A line</button>
+            onClick={addALine}>Add A line</button>
           {/* <button type="button">Submit</button> */}
         </div>
         <p className="mt-1 text-sm text-gray-600">The total is: {total()}</p>
         <button className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-        type="submit">Submit</button>
+          type="submit">Submit</button>
+        <button className="inline-flex justify-center rounded-md bg-indigo-600  px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500" onClick={() => logout()}
+          type="submit">Log Out</button>
       </form>
     </>
   );
