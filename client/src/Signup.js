@@ -13,12 +13,13 @@
   ```
 */
 import { useState } from 'react';
-import { LockClosedIcon } from '@heroicons/react/20/solid'
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signUp, setSignUp] = useState(false);
+  const navigate = useNavigate()
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -27,6 +28,10 @@ export default function Signup() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
+  function directToSign() {
+    navigate('/login');
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -145,9 +150,10 @@ export default function Signup() {
                 <button
                   type="submit"
                   className="group relative flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={directToSign}
                 >
 
-                  You successfully signed up. Please click on this button to be directed to the Log In page.
+                  You have successfully signed up. Click on this button to be directed to the Log In page.
                 </button>
               ) : null}
             </div>
