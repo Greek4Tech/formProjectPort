@@ -190,6 +190,12 @@ app.post('/charge', (req, res) => {
   .catch(error => console.error(error));
 });
 
+app.post("/send_recovery_email", (req, res) => {
+console.log("great job it worked")
+  // sendEmail(req.body)
+  //   .then((response) => res.send(response.message))
+  //   .catch((error) => res.status(500).send(error.message));
+});
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
