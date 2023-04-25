@@ -24,6 +24,7 @@ export default function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
+  const [otp, setOTP] = useState();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -71,6 +72,23 @@ export default function Signin() {
       });
   };
   
+  function navigateToOtp() {
+    if (email) {
+      const OTP = Math.floor(Math.random() * 9000 + 1000);
+      console.log(OTP);
+      setOTP(OTP);
+
+      axios
+        .post("http://localhost:4000/send_recovery_email", {
+          OTP,
+          recipient_email: email,
+        })
+        .then(console.log("Great job it worked"))
+        .catch(console.log);
+      return;
+    }
+    return alert("Please enter your email");
+  }
   
   return (
     <>
@@ -149,7 +167,9 @@ export default function Signin() {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a 
+                onClick={() => navigateToOtp()}
+                href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>
