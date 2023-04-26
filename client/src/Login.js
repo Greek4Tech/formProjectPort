@@ -83,7 +83,12 @@ export default function Signin() {
           OTP,
           recipient_email: email,
         })
-        .then(console.log("Great job it worked"))
+        .then(() => {
+          console.log("Great job it worked")
+          window.location.href = "/signup"
+
+          //  NEXT STEPS: CREATE A NEW COMPONENT, ADD IT TO THE ROUTER, THEN SEE IF OTP,recipient_email: email BECOMES AVAILABLE TO THE OTHER 
+        })
         .catch(console.log);
       return;
     }

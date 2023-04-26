@@ -112,7 +112,7 @@ app.post("/login", (request, response) => {
         .then((passwordCheck) => {
 
           // check if password matches
-          if(!passwordCheck) {
+          if (!passwordCheck) {
             return response.status(400).send({
               message: "Passwords does not match",
               error,
@@ -184,11 +184,11 @@ app.post('/charge', (req, res) => {
       "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
     }
   })
-  .then(response => {
-    console.log(response.data)
-    res.json(response.data)
-  })
-  .catch(error => console.error(error));
+    .then(response => {
+      console.log(response.data)
+      res.json(response.data)
+    })
+    .catch(error => console.error(error));
 });
 
 function sendEmail({ recipient_email, OTP }) {
@@ -247,8 +247,12 @@ function sendEmail({ recipient_email, OTP }) {
 }
 
 app.post("/send_recovery_email", (req, res) => {
+  console.log(req.body)
   sendEmail(req.body)
-    .then((response) => res.send(response.message))
+    .then((response) => {
+      res.send(response.message) 
+      console.log(response.message)
+    }) 
     .catch((error) => res.status(500).send(error.message));
 });
 
