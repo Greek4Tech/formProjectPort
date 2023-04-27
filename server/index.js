@@ -248,7 +248,7 @@ function sendEmail({ recipient_email, OTP }) {
 
 app.post("/send_recovery_email", (req, res) => {
   console.log(req.body)
-  sendEmail(req.body)
+  // sendEmail(req.body)
     .then((response) => {
       res.send(response.message) 
       console.log(response.message)
