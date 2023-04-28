@@ -72,23 +72,20 @@ export default function Signin() {
       });
   };
   
-  function navigateToOtp() {
-    if (email) {
-      const OTP = Math.floor(Math.random() * 9000 + 1000);
-      console.log(OTP);
-      setOTP(OTP);
-
-      axios
-        .post("http://localhost:4000/send_recovery_email", {
-          OTP,
-          recipient_email: email,
-        })
-        .then(console.log("Great job it worked"))
-        .catch(console.log);
-      return;
-    }
-    return alert("Please enter your email");
+  const handleForgotPassword = async (e) => {
+    const response = await fetch('http://localhost:4000/forgotpassword', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
   }
+  
   
   return (
     <>
@@ -168,7 +165,7 @@ export default function Signin() {
 
               <div className="text-sm">
                 <a 
-                onClick={() => navigateToOtp()}
+                onClick={() => handleForgotPassword()}
                 href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
