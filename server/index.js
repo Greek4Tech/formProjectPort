@@ -5,6 +5,7 @@ const cors = require('cors')
 const port = 4000;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const otpGenerator = require('otp-generator');
 
 const auth = require("./auth");
 
@@ -36,6 +37,15 @@ app.use((req, res, next) => {
 
 // User Schema
 const User = require("./config/db/userModel");
+
+// OTPSchema
+const otpSchema = new mongoose.Schema({
+  email: String,
+  otp: String,
+  createdAt: Date,
+});
+
+const OTP = mongoose.model('OTP', otpSchema);
 
 app.use(cors())
 app.use(express.json());
@@ -157,6 +167,7 @@ app.get("/auth-endpoint", auth, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
+
 app.post('/forgotpassword', async (req, res) => {
   const { email } = req.body;
 
@@ -167,12 +178,27 @@ app.post('/forgotpassword', async (req, res) => {
     } else {
       // Email exists, do something here
       res.json({ message: 'Email Found' });
+      // create an OTP
+      try {
+        const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
+        const newOTP = new OTP({
+          user: user._id,
+          otp,
+          createdAt: new Date(),
+        });
+        await newOTP.save();
+        console.log('OTP saved successfully:', newOTP);
+      } catch (error) {
+        console.error('Error saving OTP:', error);
+      }
+      
     }
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
 
 
 
