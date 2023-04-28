@@ -6,6 +6,7 @@ const port = 4000;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require('otp-generator');
+const nodemailer = require("nodemailer");
 
 const auth = require("./auth");
 
@@ -121,7 +122,7 @@ app.post("/login", (request, response) => {
         .then((passwordCheck) => {
 
           // check if password matches
-          if(!passwordCheck) {
+          if (!passwordCheck) {
             return response.status(400).send({
               message: "Passwords does not match",
               error,
@@ -171,6 +172,15 @@ app.get("/auth-endpoint", auth, (request, response) => {
 app.post('/forgotpassword', async (req, res) => {
   const { email } = req.body;
 
+  // Create a nodemailer transporter with your email service credentials
+  const transporter = nodemailer.createTransport({
+    host: 'gmail.com',
+    auth: {
+      user: process.env.MY_EMAIL,
+      pass: process.env.MY_PASSWORD,
+    }
+  });
+
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -183,6 +193,7 @@ app.post('/forgotpassword', async (req, res) => {
         const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
         const newOTP = new OTP({
           user: user._id,
+          email,
           otp,
           createdAt: new Date(),
         });
@@ -191,7 +202,7 @@ app.post('/forgotpassword', async (req, res) => {
       } catch (error) {
         console.error('Error saving OTP:', error);
       }
-      
+
     }
   } catch (err) {
     console.error(err);
@@ -227,15 +238,15 @@ app.post('/charge', (req, res) => {
       "Authorization": "Bearer sk_test_4eC39HqLyjWDarjtT1zdp7dc" // test Stripe API key
     }
   })
-  .then(response => {
-    console.log(response.data)
-    res.json(response.data)
-  })
-  .catch(error => console.error(error));
+    .then(response => {
+      console.log(response.data)
+      res.json(response.data)
+    })
+    .catch(error => console.error(error));
 });
 
 app.post("/send_recovery_email", (req, res) => {
-console.log("great job it worked")
+  console.log("great job it worked")
   // sendEmail(req.body)
   //   .then((response) => res.send(response.message))
   //   .catch((error) => res.status(500).send(error.message));
