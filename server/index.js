@@ -56,6 +56,11 @@ app.get('/', (req, res) => {
   res.json('Hello World!');
 });
 
+app.post('/forgotpassword', (req, res) => {
+  console.log(req.body)
+  res.json('Hello, this endpoint work!');
+});
+
 // register endpoint
 app.post("/register", (request, response) => {
   console.log(request.body)

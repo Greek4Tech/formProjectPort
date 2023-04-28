@@ -71,6 +71,20 @@ export default function Signin() {
       });
   };
   
+  const handleForgotPassword = async (e) => {
+    const response = await fetch('http://localhost:4000/forgotpassword', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+  }
+  
   
   return (
     <>
@@ -149,7 +163,10 @@ export default function Signin() {
               </div>
 
               <div className="text-sm">
-                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a 
+                onClick={() => handleForgotPassword()}
+                href="#" 
+                className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>
