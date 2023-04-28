@@ -157,6 +157,11 @@ app.get("/auth-endpoint", auth, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
+app.post('/forgotpassword', (req, res) => {
+  console.log(req.body)
+  res.json('Hello, this endpoint work!');
+});
+
 
 app.post('/charge', (req, res) => {
   // Create a new URLSearchParams object to store the form data
