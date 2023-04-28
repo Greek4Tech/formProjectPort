@@ -157,10 +157,23 @@ app.get("/auth-endpoint", auth, (request, response) => {
   response.json({ message: "You are authorized to access me" });
 });
 
-app.post('/forgotpassword', (req, res) => {
-  console.log(req.body)
-  res.json('Hello, this endpoint work!');
+app.post('/forgotpassword', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(404).json({ message: 'Email Not Found' });
+    } else {
+      // Email exists, do something here
+      res.json({ message: 'Email Found' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server Error' });
+  }
 });
+
 
 
 app.post('/charge', (req, res) => {
