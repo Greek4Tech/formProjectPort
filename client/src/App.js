@@ -4,6 +4,7 @@ import Home from './Home'
 import Login from './Login'
 import Signup from './Signup'
 import ProtectedRoutes from './ProtectedRoutes'
+import OTPResetInput from './OTPResetInput';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
                 <Route element={<Home/>} path="/" exact/>
             </Route>
             <Route element={<Login/>} path="/login"/>
+            <Route element={<OTPResetInput/>} path="/reset"/> 
             <Route element={<Signup/>} path="/signup"/>
           </Routes>
       </Router>

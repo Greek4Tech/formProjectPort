@@ -20,7 +20,7 @@ import axios from "axios";
 const cookies = new Cookies();
 
 
-export default function Signin() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState(false);
@@ -39,7 +39,7 @@ export default function Signin() {
   const handleSubmit = (e) => {
     // prevent the form from refreshing the whole page
     e.preventDefault();
-  
+
     // set configurations
     const configuration = {
       method: "post",
@@ -49,7 +49,7 @@ export default function Signin() {
         password,
       },
     };
-  
+
     // make the API call
     axios(configuration)
       .then((result) => {
@@ -59,19 +59,19 @@ export default function Signin() {
         });
         // redirect user to the auth page
         window.location.href = "/auth";
-  
+
         // if everything is okay, redirect user to the home page
         if (result.status === 200) {
           window.location.href = "/";
         }
-  
+
         setLogin(true);
       })
       .catch((error) => {
         error = new Error();
       });
   };
-  
+
   const handleForgotPassword = async (e) => {
     const response = await fetch('http://localhost:4000/forgotpassword', {
       method: 'POST',
@@ -82,11 +82,21 @@ export default function Signin() {
         email: email,
       }),
     });
+    if (!response.ok) {
+      console.error(`Error ${response.status}: ${response.statusText}`);
+      return;
+    }
     const data = await response.json();
-    console.log(data);
-  }
-  
-  
+    try {
+      if (data.otpSent === true) {
+        window.location.href = '/reset';
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
   return (
     <>
       {/*
@@ -164,9 +174,9 @@ export default function Signin() {
               </div>
 
               <div className="text-sm">
-                <a 
-                onClick={() => handleForgotPassword()}
-                href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a
+                  onClick={() => handleForgotPassword()}
+                  href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>
