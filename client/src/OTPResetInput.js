@@ -20,7 +20,7 @@ export default function OTPResetInput() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
           <div className="max-w-xl lg:max-w-lg">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Subscribe to our newsletter.</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">We have sent your password reset code to the email below:</h2>
             <p className="mt-4 text-lg leading-8 text-gray-300">
               Nostrud amet eu ullamco nisi aute in ad minim nostrud adipisicing velit quis. Duis tempor incididunt
               dolore.
@@ -44,7 +44,11 @@ export default function OTPResetInput() {
               >
                 Subscribe
               </button>
-            </div>
+              </div>
+              <div class="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                <p>Didn't recieve code?</p> <a class="flex flex-row items-center text-blue-600" href="http://" target="_blank" rel="noopener noreferrer">Resend</a>
+              </div>
+            
           </div>
           <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
             <div className="flex flex-col items-start">
