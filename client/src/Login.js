@@ -73,6 +73,10 @@ export default function Login() {
   };
 
   const handleForgotPassword = async (e) => {
+    if (!email) {
+      alert('Please enter your email');
+      return;
+    }
     const response = await fetch('http://localhost:4000/forgotpassword', {
       method: 'POST',
       headers: {
@@ -89,7 +93,9 @@ export default function Login() {
     const data = await response.json();
     try {
       if (data.otpSent === true) {
-        window.location.href = '/reset';
+        setTimeout(() => {
+          window.location.href = '/reset';
+        }, 3000); // 3 seconds delay
       }
     } catch (err) {
       console.error(err);
