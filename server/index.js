@@ -174,7 +174,7 @@ app.post('/forgotpassword', async (req, res) => {
 
   // Create a nodemailer transporter with your email service credentials
   const transporter = nodemailer.createTransport({
-    host: 'gmail.com',
+    host: 'smtp.gmail.com',
     auth: {
       user: process.env.MY_EMAIL,
       pass: process.env.MY_PASSWORD,
@@ -187,7 +187,6 @@ app.post('/forgotpassword', async (req, res) => {
       res.status(404).json({ message: 'Email Not Found' });
     } else {
       // Email exists, do something here
-      res.json({ message: 'Email Found' });
       // create an OTP
       try {
         const otp = otpGenerator.generate(6, { upperCase: false, specialChars: false });
@@ -198,9 +197,22 @@ app.post('/forgotpassword', async (req, res) => {
           createdAt: new Date(),
         });
         await newOTP.save();
+        // Send the OTP to the user's email address
+        const mailOptions = {
+          from: 'leonidas.gkimisis@gmail.com',
+          to: email,
+          subject: 'Password Reset OTP',
+          text: `Your OTP is ${otp}.`,
+        };
+
         console.log('OTP saved successfully:', newOTP);
+
+        await transporter.sendMail(mailOptions);
+        res.json({ message: 'Email Found', otpSent: true });
+        
       } catch (error) {
         console.error('Error saving OTP:', error);
+        res.status(500).json({ message: 'Server Error' });
       }
 
     }
@@ -209,6 +221,7 @@ app.post('/forgotpassword', async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 });
+
 
 
 
